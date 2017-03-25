@@ -7,12 +7,12 @@
     android:orientation="vertical"
     tools:context="com.mad.k00191419.prorun.activities.CurrentActivity">
 
-    <!--<android.support.v4.view.ViewPager-->
-        <!--android:id="@+id/vpCurrentActivity"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--tools:layout_editor_absoluteX="8dp"-->
-        <!--tools:layout_editor_absoluteY="8dp">-->
+    <android.support.v4.view.ViewPager
+        android:id="@+id/vpCurrentActivity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
 
         <LinearLayout
             android:id="@+id/layoutCurrentStats"
@@ -189,13 +189,14 @@
             android:id="@+id/layoutCurrentMap"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0"
+            android:layout_weight="1"
             android:orientation="vertical">
 
             <com.google.android.gms.maps.MapView
-                android:id="@+id/mapView"
+                android:id="@+id/mapCurrent"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent" />
         </LinearLayout>
-    <!--</android.support.v4.view.ViewPager>-->
+
+    </android.support.v4.view.ViewPager>
 </LinearLayout>
