@@ -14,4 +14,15 @@
     <string name="string_label_daily_prog">Progress to Daily Goal</string>
     <string name="string_label_monthly_prog">Progress to Monthly Goal</string>
     <string name="string_label_weekly_prog">Progress to Weekly Goal</string>
+    <string name="string_label_history">History</string>
+    <string name="string_label_goals">Goals</string>
+    <string name="string_label_daily">Daily</string>
+    <string name="string_label_weekly">Weekly</string>
+    <string name="string_label_monthly">Monthly</string>
+
+    <string name="string_label_distance">Distance</string>
+    <string name="string_label_calories">Calories</string>
+    <string name="string_btn_setgoal">Set Goal</string>
+
+
 </resources>
