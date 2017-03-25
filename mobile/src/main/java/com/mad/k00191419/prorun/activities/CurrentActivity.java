@@ -12,16 +12,22 @@ import com.mad.k00191419.prorun.R;
 public class CurrentActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current);
 
         // get references to private fields
-        mViewPager = (ViewPager)findViewById(R.id.vpCurrentActivity);
+        setupReferences();
 
         CurrentActivityPagerAdapter adapter = new CurrentActivityPagerAdapter();
         mViewPager.setAdapter(adapter);
+    }
+
+    private void setupReferences() {
+        mViewPager = (ViewPager)findViewById(R.id.vpCurrentActivity);
+
     }
 
     public class CurrentActivityPagerAdapter extends PagerAdapter {
