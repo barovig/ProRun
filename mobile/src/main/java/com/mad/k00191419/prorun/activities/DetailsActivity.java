@@ -25,7 +25,7 @@ public class DetailsActivity extends AppCompatActivity {
     }
 
     private void setupReferences() {
-        mViewPager = (ViewPager)findViewById(R.id.vpCurrentActivity);
+        mViewPager = (ViewPager)findViewById(R.id.vpDetailsActivity);
 
     }
 
@@ -49,7 +49,8 @@ public class DetailsActivity extends AppCompatActivity {
                     break;
             }
 
-            return findViewById(layoutId);
+            View layout = findViewById(layoutId);
+            return layout;
         }
 
         @Override
@@ -60,6 +61,11 @@ public class DetailsActivity extends AppCompatActivity {
         @Override
         public boolean isViewFromObject(View view, Object object) {
             return view == object;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View)object);
         }
     }
 }
