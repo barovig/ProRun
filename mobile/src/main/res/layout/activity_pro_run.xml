@@ -5,7 +5,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.mad.k00191419.prorun.ProRunActivity">
+    tools:context="com.mad.k00191419.prorun.activities.ProRunActivity">
 
 
     <RelativeLayout
@@ -23,7 +23,7 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="24dp"
             android:gravity="center_horizontal"
-            android:text="TextView" />
+            android:text="progress_label" />
 
         <Spinner
             android:id="@+id/spinGoalPeriod"

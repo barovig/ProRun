@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.mad.k00191419.prorun.activities.CurrentActivity">
+
+    <!--<android.support.v4.view.ViewPager-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--tools:layout_editor_absoluteY="8dp"-->
+        <!--tools:layout_editor_absoluteX="8dp">-->
+
+    <LinearLayout
+        android:id="@+id/layoutCurrentStats"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tvLabelCurrentDistance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center_horizontal"
+                        android:text="@string/string_label_distance" />
+
+                    <TextView
+                        android:id="@+id/tvCurrentDistance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/tvLabelCurrentDistance"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/tvLabelCurrentDistance"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="38dp"
+                        android:gravity="center_horizontal"
+                        android:text="current_distance" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tvLabelCurrentTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center_horizontal"
+                        android:text="@string/string_label_time" />
+
+                    <TextView
+                        android:id="@+id/tvCurrentTime"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/tvLabelCurrentTime"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/tvLabelCurrentTime"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="38dp"
+                        android:gravity="center_horizontal"
+                        android:text="current_time" />
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tvLabelCurrentSpeed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center_horizontal"
+                        android:text="@string/string_label_speed" />
+
+                    <TextView
+                        android:id="@+id/tvCurrentSpeed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/tvLabelCurrentSpeed"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/tvLabelCurrentSpeed"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="38dp"
+                        android:gravity="center_horizontal"
+                        android:text="current_speed" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/tvLabelCurrentCalories"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:gravity="center_horizontal"
+                        android:text="@string/string_label_calories" />
+
+                    <TextView
+                        android:id="@+id/tvCurrentCalories"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignEnd="@+id/tvLabelCurrentCalories"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/tvLabelCurrentCalories"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="38dp"
+                        android:gravity="center_horizontal"
+                        android:text="current_calories" />
+                </RelativeLayout>
+            </TableRow>
+        </TableLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/layoutCurrentMap"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <!--</android.support.v4.view.ViewPager>-->
+</LinearLayout>
