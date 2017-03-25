@@ -1,11 +1,17 @@
 <resources>
     <string name="app_name">ProRun</string>
-    <string name="string_label_distance">Total Distance</string>
-    <string name="string_label_time">Total Time</string>
-    <string name="string_label_speed">Current Speed</string>
-    <string name="string_label_calories">Calories Spent</string>
+    <string name="string_label_current_distance">Current Distance</string>
+    <string name="string_label_current_time">Current Time</string>
+    <string name="string_label_current_speed">Current Speed</string>
+    <string name="string_label_current_calories">Calories Spent</string>
     <string name="string_btn_ok" >OK</string>
     <string name="string_btn_details" >Details</string>
+    <string name="string_label_total_distance" >Total Distance</string>
+    <string name="string_label_total_time" >Total Time</string>
     <string name="string_label_avg_speed" >Average Speed</string>
     <string name="string_label_total_cal" >Total Calories</string>
+    <string name="string_label_start_date">Start Date</string>
+    <string name="string_label_daily_prog" >Progress to Daily Goal</string>
+    <string name="string_label_monthly_prog" >Progress to Monthly Goal</string>
+    <string name="string_label_weekly_prog" >Progress to Weekly Goal</string>
 </resources>

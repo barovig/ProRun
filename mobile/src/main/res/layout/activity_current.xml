@@ -7,12 +7,12 @@
     android:orientation="vertical"
     tools:context="com.mad.k00191419.prorun.activities.CurrentActivity">
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/vpCurrentActivity"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp">
+    <!--<android.support.v4.view.ViewPager-->
+        <!--android:id="@+id/vpCurrentActivity"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--tools:layout_editor_absoluteX="8dp"-->
+        <!--tools:layout_editor_absoluteY="8dp">-->
 
         <LinearLayout
             android:id="@+id/layoutCurrentStats"
@@ -37,7 +37,7 @@
                         android:layout_weight="1">
 
                         <TextView
-                            android:id="@+id/tvLabelSummaryDistance"
+                            android:id="@+id/tvLabelCurrentDistance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -46,15 +46,15 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="20dp"
                             android:gravity="center_horizontal"
-                            android:text="@string/string_label_distance" />
+                            android:text="@string/string_label_current_distance" />
 
                         <TextView
                             android:id="@+id/tvCurrentDistance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/tvLabelSummaryDistance"
+                            android:layout_alignEnd="@+id/tvLabelCurrentDistance"
                             android:layout_alignParentStart="true"
-                            android:layout_below="@+id/tvLabelSummaryDistance"
+                            android:layout_below="@+id/tvLabelCurrentDistance"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="38dp"
                             android:gravity="center_horizontal"
@@ -68,7 +68,7 @@
                         android:layout_weight="1">
 
                         <TextView
-                            android:id="@+id/tvLabelSummaryTime"
+                            android:id="@+id/tvLabelCurrentTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -77,15 +77,15 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="20dp"
                             android:gravity="center_horizontal"
-                            android:text="@string/string_label_time" />
+                            android:text="@string/string_label_current_time" />
 
                         <TextView
                             android:id="@+id/tvCurrentTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/tvLabelSummaryTime"
+                            android:layout_alignEnd="@+id/tvLabelCurrentTime"
                             android:layout_alignParentStart="true"
-                            android:layout_below="@+id/tvLabelSummaryTime"
+                            android:layout_below="@+id/tvLabelCurrentTime"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="38dp"
                             android:gravity="center_horizontal"
@@ -104,7 +104,7 @@
                         android:layout_weight="1">
 
                         <TextView
-                            android:id="@+id/tvLabelAverageSpeed"
+                            android:id="@+id/tvLabelCurrentSpeed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -113,15 +113,15 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="20dp"
                             android:gravity="center_horizontal"
-                            android:text="@string/string_label_speed" />
+                            android:text="@string/string_label_current_speed" />
 
                         <TextView
                             android:id="@+id/tvCurrentSpeed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/tvLabelAverageSpeed"
+                            android:layout_alignEnd="@+id/tvLabelCurrentSpeed"
                             android:layout_alignParentStart="true"
-                            android:layout_below="@+id/tvLabelAverageSpeed"
+                            android:layout_below="@+id/tvLabelCurrentSpeed"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="38dp"
                             android:gravity="center_horizontal"
@@ -134,7 +134,7 @@
                         android:layout_weight="1">
 
                         <TextView
-                            android:id="@+id/tvLabelSummaryCalories"
+                            android:id="@+id/tvLabelCurrentCalories"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -143,15 +143,15 @@
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="20dp"
                             android:gravity="center_horizontal"
-                            android:text="@string/string_label_calories" />
+                            android:text="@string/string_label_current_calories" />
 
                         <TextView
                             android:id="@+id/tvCurrentCalories"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/tvLabelSummaryCalories"
+                            android:layout_alignEnd="@+id/tvLabelCurrentCalories"
                             android:layout_alignParentStart="true"
-                            android:layout_below="@+id/tvLabelSummaryCalories"
+                            android:layout_below="@+id/tvLabelCurrentCalories"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="38dp"
                             android:gravity="center_horizontal"
@@ -197,5 +197,5 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-    </android.support.v4.view.ViewPager>
+    <!--</android.support.v4.view.ViewPager>-->
 </LinearLayout>
