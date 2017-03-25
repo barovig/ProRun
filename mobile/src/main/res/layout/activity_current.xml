@@ -37,7 +37,7 @@
                         android:layout_weight="1">
 
                         <TextView
-                            android:id="@+id/tvLabelCurrentDistance"
+                            android:id="@+id/tvLabelSummaryDistance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -52,9 +52,9 @@
                             android:id="@+id/tvCurrentDistance"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/tvLabelCurrentDistance"
+                            android:layout_alignEnd="@+id/tvLabelSummaryDistance"
                             android:layout_alignParentStart="true"
-                            android:layout_below="@+id/tvLabelCurrentDistance"
+                            android:layout_below="@+id/tvLabelSummaryDistance"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="38dp"
                             android:gravity="center_horizontal"
@@ -68,7 +68,7 @@
                         android:layout_weight="1">
 
                         <TextView
-                            android:id="@+id/tvLabelCurrentTime"
+                            android:id="@+id/tvLabelSummaryTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -83,9 +83,9 @@
                             android:id="@+id/tvCurrentTime"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/tvLabelCurrentTime"
+                            android:layout_alignEnd="@+id/tvLabelSummaryTime"
                             android:layout_alignParentStart="true"
-                            android:layout_below="@+id/tvLabelCurrentTime"
+                            android:layout_below="@+id/tvLabelSummaryTime"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="38dp"
                             android:gravity="center_horizontal"
@@ -104,7 +104,7 @@
                         android:layout_weight="1">
 
                         <TextView
-                            android:id="@+id/tvLabelCurrentSpeed"
+                            android:id="@+id/tvLabelAverageSpeed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -119,9 +119,9 @@
                             android:id="@+id/tvCurrentSpeed"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/tvLabelCurrentSpeed"
+                            android:layout_alignEnd="@+id/tvLabelAverageSpeed"
                             android:layout_alignParentStart="true"
-                            android:layout_below="@+id/tvLabelCurrentSpeed"
+                            android:layout_below="@+id/tvLabelAverageSpeed"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="38dp"
                             android:gravity="center_horizontal"
@@ -134,7 +134,7 @@
                         android:layout_weight="1">
 
                         <TextView
-                            android:id="@+id/tvLabelCurrentCalories"
+                            android:id="@+id/tvLabelSummaryCalories"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -149,9 +149,9 @@
                             android:id="@+id/tvCurrentCalories"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignEnd="@+id/tvLabelCurrentCalories"
+                            android:layout_alignEnd="@+id/tvLabelSummaryCalories"
                             android:layout_alignParentStart="true"
-                            android:layout_below="@+id/tvLabelCurrentCalories"
+                            android:layout_below="@+id/tvLabelSummaryCalories"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="38dp"
                             android:gravity="center_horizontal"

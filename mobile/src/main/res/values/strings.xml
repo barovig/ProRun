@@ -4,4 +4,8 @@
     <string name="string_label_time">Total Time</string>
     <string name="string_label_speed">Current Speed</string>
     <string name="string_label_calories">Calories Spent</string>
+    <string name="string_btn_ok" >OK</string>
+    <string name="string_btn_details" >Details</string>
+    <string name="string_label_avg_speed" >Average Speed</string>
+    <string name="string_label_total_cal" >Total Calories</string>
 </resources>
