@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.mad.k00191419.prorun.activities.SetGoalsActivity">
+
+    <TextView
+        android:id="@+id/tvLabelSetGoal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="43dp"
+        android:gravity="center_horizontal"
+        android:text="label_set_goal_for_x" />
+
+    <TextView
+        android:id="@+id/tvLabelSetDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tvLabelSetGoal"
+        android:layout_marginStart="34dp"
+        android:layout_marginTop="81dp"
+        android:text="@string/string_label_distance" />
+
+    <EditText
+        android:id="@+id/etDistance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/tvLabelSetGoal"
+        android:layout_marginEnd="17dp"
+        android:layout_marginTop="62dp"
+        android:ems="10"
+        android:hint="@string/string_label_distance"
+        android:inputType="number" />
+
+    <TextView
+        android:id="@+id/tvLabelSetCalories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tvLabelSetDistance"
+        android:layout_below="@+id/etDistance"
+        android:layout_marginTop="71dp"
+        android:text="@string/string_label_calories" />
+
+    <EditText
+        android:id="@+id/etCalories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/etDistance"
+        android:layout_below="@+id/etDistance"
+        android:layout_marginTop="50dp"
+        android:ems="10"
+        android:hint="@string/string_label_calories"
+        android:inputType="number" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/tvLabelSetDistance"
+        android:layout_marginBottom="83dp"
+        android:text="Button"
+        tools:text="@string/string_btn_save" />
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/etCalories"
+        android:layout_alignTop="@+id/btnSave"
+        android:layout_marginEnd="22dp"
+        android:text="@string/string_btn_cancel" />
+</RelativeLayout>

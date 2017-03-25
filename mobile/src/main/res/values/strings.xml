@@ -23,6 +23,8 @@
     <string name="string_label_distance">Distance</string>
     <string name="string_label_calories">Calories</string>
     <string name="string_btn_setgoal">Set Goal</string>
+    <string name="string_btn_save">Save</string>
+    <string name="string_btn_cancel">Cancel</string>
 
 
 </resources>

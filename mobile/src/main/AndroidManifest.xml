@@ -22,7 +22,8 @@
             android:noHistory="true" />
         <activity android:name=".activities.DetailsActivity" />
         <activity android:name=".activities.HistoryActivity" />
-        <activity android:name=".activities.ViewGoalsActivity"></activity>
+        <activity android:name=".activities.ViewGoalsActivity" />
+        <activity android:name=".activities.SetGoalsActivity"></activity>
     </application>
 
 </manifest>
