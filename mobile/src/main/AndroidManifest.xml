@@ -9,6 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
         <activity android:name=".activities.ProRunActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +26,8 @@
         <activity android:name=".activities.DetailsActivity" />
         <activity android:name=".activities.HistoryActivity" />
         <activity android:name=".activities.ViewGoalsActivity" />
-        <activity android:name=".activities.SetGoalsActivity"></activity>
+        <activity android:name=".activities.SetGoalsActivity" />
+        <activity android:name=".activities.MapActivity"></activity>
     </application>
 
 </manifest>

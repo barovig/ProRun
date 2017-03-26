@@ -7,11 +7,13 @@
     tools:context="com.mad.k00191419.prorun.activities.SummaryActivity">
 
     <fragment
+        android:id="@+id/fragment_summary"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="5"
         android:name="com.mad.k00191419.prorun.fragments.SummaryFragment"
         tools:layout="@layout/fragment_summary"/>
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"

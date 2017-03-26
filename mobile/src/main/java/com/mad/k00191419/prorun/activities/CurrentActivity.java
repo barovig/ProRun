@@ -1,24 +1,20 @@
 package com.mad.k00191419.prorun.activities;
 
 import android.content.Intent;
-import android.media.Image;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageButton;
 
 import com.mad.k00191419.prorun.R;
 
 public class CurrentActivity extends AppCompatActivity implements View.OnClickListener{
 
-    private ViewPager mViewPager;
-
     // View References
     ImageButton ibStop;
     ImageButton ibStartPause;
+    Button      btnOpenMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,12 +29,13 @@ public class CurrentActivity extends AppCompatActivity implements View.OnClickLi
     private void setupListeners() {
         ibStop.setOnClickListener(this);
         ibStartPause.setOnClickListener(this);
+        btnOpenMap.setOnClickListener(this);
     }
 
     private void setupReferences() {
-        mViewPager = (ViewPager)findViewById(R.id.vpCurrentActivity);
         ibStop = (ImageButton)findViewById(R.id.ibStop);
         ibStartPause = (ImageButton)findViewById(R.id.ibStartPause);
+        btnOpenMap = (Button)findViewById(R.id.btnOpenMap);
     }
 
     // Interface Implementations
@@ -49,7 +46,17 @@ public class CurrentActivity extends AppCompatActivity implements View.OnClickLi
             case R.id.ibStop:
                 stopCurrentRun();
                 break;
+            case R.id.ibStartPause:
+                startPauseRun();
+                break;
+            case R.id.btnOpenMap:
+                Intent intent = new Intent(this, MapActivity.class);
+                startActivity(intent);
+                break;
         }
+    }
+
+    private void startPauseRun() {
     }
 
     private void stopCurrentRun() {
