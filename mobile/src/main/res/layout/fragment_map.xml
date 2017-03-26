@@ -1,0 +1,13 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="com.mad.k00191419.prorun.fragments.MapFragment"
+android:orientation="vertical">
+
+<com.google.android.gms.maps.MapView
+    android:id="@+id/mapRouteTaken"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" />
+
+</LinearLayout>
