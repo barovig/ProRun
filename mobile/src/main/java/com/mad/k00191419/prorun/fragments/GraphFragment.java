@@ -9,9 +9,7 @@ import android.view.ViewGroup;
 
 import com.mad.k00191419.prorun.R;
 
-/**
- * A simple {@link Fragment} subclass.
- */
+
 public class GraphFragment extends Fragment {
 
 
