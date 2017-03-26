@@ -60,6 +60,9 @@ public class CurrentActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private void stopCurrentRun() {
+        // finish this activity and don't return to it if navigating back.
+        finish();
+        // start summary activity
         Intent intent = new Intent(this, SummaryActivity.class);
         startActivity(intent);
     }
