@@ -188,12 +188,11 @@ public class ProRunDB {
         @Override
         public void onCreate(SQLiteDatabase db) {
             // create tables
-//            db.execSQL(CREATE_PLAYER_TABLE);
-//
-//            // insert players
-//            db.execSQL("INSERT INTO "+PLAYER_TABLE+" VALUES (1, 'John', 0, 0, 0)");
-//            db.execSQL("INSERT INTO "+PLAYER_TABLE+" VALUES (2, 'Jane', 0, 0, 0)");
-//            db.execSQL("INSERT INTO "+PLAYER_TABLE+" VALUES (3, 'Jack', 0, 0, 0)");
+            db.execSQL(CREATE_RUNS_TABLE);
+            db.execSQL(CREATE_LOCATIONS_TABLE);
+            db.execSQL(CREATE_DAILY_GOALS_TABLE);
+            db.execSQL(CREATE_WEEKLY_GOALS_TABLE);
+            db.execSQL(CREATE_MONTHLY_GOALS_TABLE);
 
         }
 
