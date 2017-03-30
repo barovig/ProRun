@@ -158,16 +158,16 @@
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/ibStartPause"
             android:layout_marginEnd="67dp"
-            app:srcCompat="@android:drawable/presence_online" />
+            app:srcCompat="@mipmap/stop" />
 
         <ImageButton
             android:id="@+id/ibStartPause"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@android:drawable/presence_online"
-            android:layout_marginStart="75dp"
+            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:layout_alignParentStart="true" />
+            android:layout_marginStart="75dp"
+            app:srcCompat="@mipmap/play" />
 
         <Button
             android:id="@+id/btnOpenMap"

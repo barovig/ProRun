@@ -5,7 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.location.Location;
 import android.util.Log;
+
+import java.util.ArrayList;
 
 public class ProRunDB {
 
@@ -27,7 +30,7 @@ public class ProRunDB {
     public static final int    LOCATION_LATITUDE_COL = 2;
 
     public static final String LOCATION_LONGITUDE = "longitude";
-    public static final int    LOCATION_PLAYER_WINS_COL = 3;
+    public static final int    LOCATION_LONGITUDE_COL = 3;
 
     public static final String LOCATION_TIME = "time";
     public static final int    LOCATION_TIME_COL = 4;
@@ -236,66 +239,163 @@ Log.d("__PLAYER_APP", "Deleting all data!");
             db.close();
     }
 
-//    public ArrayList<Player> getPlayers() {
-//
-//        this.openReadableDB();
-//        Cursor cursor = db.query(PLAYER_TABLE, null,
-//                null, null,
-//                null, null, null);
-//
-//        ArrayList<Player> players = new ArrayList<Player>();
-//        while (cursor.moveToNext()) {
-//            players.add(getPlayerFromCursor(cursor));
-//        }
-//
-//        if (cursor != null)
-//            cursor.close();
-//
-//        this.closeDB();
-//Log.d(APP_NAME, "Retrieved "+players.size()+" players from DB");
-//
-//        return players;
-//    }
-//
-//    private static Player getPlayerFromCursor(Cursor cursor) {
-//        if (cursor == null || cursor.getCount() == 0){
-//Log.d(APP_NAME, "getting player from cursor.. cursor EMPTY!");
-//            return null;
-//        }
-//        else {
-//            try {
-//                Player p = new Player(
-//                        cursor.getInt(PLAYER_ID_COL),
-//                        cursor.getString(PLAYER_NAME_COL),
-//                        cursor.getInt(PLAYER_WINS_COL),
-//                        cursor.getInt(PLAYER_LOSSES_COL),
-//                        cursor.getInt(PLAYER_TIES_COL));
-//                return p;
-//            }
-//            catch(Exception e) {
-//Log.d(APP_NAME, "getting player from cursor.. exception when creating PLAYER!");
-//
-//                return null;
-//            }
-//        }
-//    }
-//
-//    public long insertPlayer(Player p) {
-//        ContentValues cv = new ContentValues();
-//        cv.put(PLAYER_ID, p.getId());
-//        cv.put(PLAYER_NAME, p.getName());
-//        cv.put(PLAYER_WINS, p.getWins());
-//        cv.put(PLAYER_LOSSES, p.getLosses());
-//        cv.put(PLAYER_TIES, p.getTies());
-//
-//Log.d(APP_NAME, "Inserting player to DB: \n"+p.toString());
-//
-//        this.openWriteableDB();
-//        long rowID = db.insert(PLAYER_TABLE, null, cv);
-//        this.closeDB();
-//
-//        return rowID;
-//    }
+    public ArrayList<Run> getRuns() {
+
+        this.openReadableDB();
+        Cursor cursor = db.query(RUNS_TBL, null,
+                null, null,
+                null, null, null);
+        // create empty runs list
+        ArrayList<Run> runs = new ArrayList<Run>();
+
+        // populate runs list with data from runs table
+        while (cursor.moveToNext()) {
+            runs.add(getRunFromCursor(cursor));
+        }
+
+        // populate each run's locations
+        for(Run run : runs){
+            // move cursor to locations table and get those for that run
+            cursor = db.query(LOCATIONS_TBL,
+                        null,
+                        LOCATION_RUN_NO+"=?",   // where RUN is run.getNo()
+                        new String[]{run.getNo()+""},
+                        null, null, null, null);
+
+            for(Location loc : getLocationsForRun(run.getNo(), cursor)){
+                run.addLocation(loc);
+            }
+        }
+        if (cursor != null)
+            cursor.close();
+
+        this.closeDB();
+        Log.d(APP_NAME, "Retrieved "+runs.size()+" players from "+RUNS_TBL);
+
+        return runs;
+    }
+
+    private ArrayList<Location> getLocationsForRun(long runNo, Cursor cursor) {
+
+        ArrayList<Location> list = new ArrayList<>();
+
+        // populate loactions list with data from locations table
+        while (cursor.moveToNext()) {
+            list.add(getLocationFromCursor(cursor));
+        }
+        return list;
+    }
+
+    private Location getLocationFromCursor(Cursor cursor) {
+
+        Log.d(APP_NAME, "getting LOCATION from cursor..");
+
+        if (cursor == null || cursor.getCount() == 0){
+            Log.d(APP_NAME, "cursor EMPTY!");
+            return null;
+        }
+        else {
+            try {
+                Location loc = new Location("GPS");
+                loc.setLatitude(cursor.getDouble(LOCATION_LATITUDE_COL));
+                loc.setLongitude(cursor.getDouble(LOCATION_LONGITUDE_COL));
+                loc.setTime(cursor.getInt(LOCATION_TIME_COL));
+                return loc;
+            }
+            catch(Exception e) {
+                Log.d(APP_NAME, "exception when creating LOCATION!:"+e.getMessage());
+                return null;
+            }
+        }
+    }
+
+    private static Run getRunFromCursor(Cursor cursor) {
+
+        Log.d(APP_NAME, "getting RUN from cursor..");
+
+        if (cursor == null || cursor.getCount() == 0){
+            Log.d(APP_NAME, "cursor EMPTY!");
+            return null;
+        }
+        else {
+            try {
+                Run r = new Run(
+                        cursor.getInt(RUN_NO_COL),
+                        cursor.getInt(RUN_START_DATE_COL),
+                        cursor.getInt(RUN_TOTAL_TIME_COL),
+                        cursor.getFloat(RUN_TOTAL_DISTANCE_COL),
+                        cursor.getInt(RUN_TOTAL_CALORIES_COL),
+                        cursor.getDouble(RUN_AVG_SPEED_COL));
+                return r;
+            }
+            catch(Exception e) {
+                Log.d(APP_NAME, "exception when creating RUN!:"+e.getMessage());
+                return null;
+            }
+        }
+    }
+
+    private long writeRun(Run r) {
+        ContentValues cv = new ContentValues();
+        cv.put(RUN_NO, r.getNo());
+        cv.put(RUN_START_DATE, r.getStartDate());
+        cv.put(RUN_AVG_SPEED, r.getAvgSpeed());
+        cv.put(RUN_TOTAL_CALORIES, r.getTotalCalories());
+        cv.put(RUN_TOTAL_DISTANCE, r.getTotalDistance());
+        cv.put(RUN_TOTAL_TIME, r.getTotalTime());
+
+Log.d(APP_NAME, "Inserting RUN to DB: \n"+r.toString());
+
+        this.openWriteableDB();
+        long rowID = db.insert(RUNS_TBL, null, cv);
+        this.closeDB();
+
+        return rowID;
+    }
+
+    private long insertLocation(Location l, long runNo){
+        ContentValues cv = new ContentValues();
+        cv.put(LOCATION_LATITUDE, l.getLatitude());
+        cv.put(LOCATION_LONGITUDE, l.getLongitude());
+        cv.put(LOCATION_TIME, l.getTime());
+        cv.put(LOCATION_RUN_NO, runNo);
+
+        Log.d(APP_NAME, "Inserting Location to DB: \n"+l.toString());
+
+        this.openWriteableDB();
+        long rowID = db.insert(LOCATIONS_TBL, null, cv);
+        this.closeDB();
+
+        return rowID;
+    }
+
+    public long insertRun(Run r){
+        long rowId = writeRun(r);
+
+        for(Location l : r.getLocations()){
+            insertLocation(l, r.getNo());
+        }
+
+        return rowId;
+    }
+
+    public long getNextRunNo(){
+        this.openReadableDB();
+        Cursor cursor = db.query(RUNS_TBL, new String[]{RUN_NO},
+                null, null,
+                null, null, RUN_NO+" DESC", "1");
+        cursor.moveToFirst();
+        long no = 1;
+        if(cursor.getCount() > 0){
+            no = cursor.getLong(0)+1;
+        }
+        if (cursor != null)
+            cursor.close();
+
+        this.closeDB();
+        return no;
+    }
+}
 //    public int updatePlayer(Player p) {
 //        ContentValues cv = new ContentValues();
 //        cv.put(PLAYER_NAME, p.getName());
@@ -327,4 +427,4 @@ Log.d("__PLAYER_APP", "Deleting all data!");
 //
 //        return rowCount;
 //    }
-}
+

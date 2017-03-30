@@ -1,25 +1,95 @@
 package com.mad.k00191419.prorun.services;
 
+import android.Manifest;
 import android.app.Service;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
+import android.location.LocationManager;
+import android.location.LocationProvider;
+import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.util.Log;
+import com.mad.k00191419.prorun.db.ProRunDB;
+import com.mad.k00191419.prorun.db.Run;
+import com.mad.k00191419.prorun.utils.Utils;
+//import com.android.server.*
+
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 
 
 public class ProRunService extends Service implements LocationListener {
 
+    // Consts
+    private final String    APP_NAME = "__PRO_RUN";
+    private final long      MIN_TIME_INTERVAL_MS = 0;
+
+    // Service fields
+    private LocationManager mLocationManager;
+    private long            mRunNo;
+    private final IBinder   mBinder = new LocalBinder();
+    private ProRunDB        mDb;
+    private Run             mRun;
+    private boolean         isRunning = false;
+    private float           mDistance;
+    private long            mTime;
+    private long            mCalories;
+    private float           mSpeed;
+    private long            mStartDate;
+    private Location        mLastLocation;
+
+    // inner Binder subclass
+    public class LocalBinder extends Binder {
+        public ProRunService getService() {
+            return ProRunService.this;
+        }
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+
+        // get db
+        mDb = new ProRunDB(getApplicationContext());
+        // setup LocationManager
+        mLocationManager = (LocationManager) this.getSystemService(getApplicationContext().LOCATION_SERVICE);
+        setupLocationListener();
+    }
+
+    // Overrides
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
-        return null;
+
+        Log.d(APP_NAME, "Binding ProRunService...");
+        return mBinder;
     }
 
     @Override
     public void onLocationChanged(Location location) {
-
+        if(isRunning) {
+            long locTime = location.getTime();
+            Log.d(APP_NAME, String.format("S:%d\tL:%d\n", mStartDate, locTime));
+            if(locTime > mStartDate) {    // skip locations before startDate
+                // update stats
+                long timeInterval = (locTime - mStartDate);
+                float distInterval =
+                        (mLastLocation == null) ? 0 : mLastLocation.distanceTo(location);
+                mTime += timeInterval;
+                mDistance += distInterval;
+                mSpeed = distInterval / (timeInterval / 1000);
+                mRun.addLocation(location);
+                mLastLocation = location;
+                Log.d(APP_NAME, String.format("D%f\tT%d\tS%f\t", mDistance, mTime, mSpeed));
+            }
+        }
     }
 
     @Override
@@ -36,4 +106,65 @@ public class ProRunService extends Service implements LocationListener {
     public void onProviderDisabled(String provider) {
 
     }
+
+    public void startRun(){
+        mStartDate = System.currentTimeMillis();
+        // get next run's ID
+        mRunNo = mDb.getNextRunNo();
+        // create Run object
+        mRun = new Run(mRunNo,  mStartDate, 0, 0, 0, 0);
+        isRunning = true;
+        // set fields
+        mDistance = 0;
+        mTime = 0;
+        mSpeed = 0;
+        mCalories = 0;
+
+    }
+
+    public void pauseRun(){
+        isRunning = false;
+    }
+
+    public void resumeRun(){
+        setupLocationListener();
+    }
+
+    private void setupLocationListener() {
+        // check permission and set listener
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            /// HANDLE PERMISSION DENIAL
+            return;
+        }
+       // new GnssLocationProvider();
+
+        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_INTERVAL_MS, 1, this);
+        LocationProvider p = mLocationManager.getProvider(LocationManager.GPS_PROVIDER);
+        try {
+            Class classGpsProvider = Class.forName("com.android.server.location.GnssLocationProvider");
+            classGpsProvider.cast(p);
+        }
+        catch (Exception e){
+            String s = e.getMessage();
+        }
+    }
+
+    public void stopRun(){
+        // create and add run ONLY after run is stopped
+        mDb.insertRun(mRun);
+        // clear Run obj
+        mRun = null;
+        isRunning = false;
+    }
+
+    public String[] getStats(){
+        return new String[]{ mDistance+"", mTime+"", mSpeed+"m/s"};
+    }
+
+    public Run getRun(){
+        return mRun;
+    }
+
 }

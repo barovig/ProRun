@@ -56,18 +56,19 @@
             android:id="@+id/ibStart"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignTop="@+id/ibStop"
-            android:layout_marginStart="76dp"
-            app:srcCompat="@android:drawable/presence_online" />
+            app:srcCompat="@mipmap/play"
+            android:layout_marginStart="73dp"
+            android:layout_marginBottom="13dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
 
         <ImageButton
             android:id="@+id/ibStop"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@android:drawable/presence_online"
-            android:layout_marginEnd="76dp"
-            android:layout_centerVertical="true"
+            app:srcCompat="@mipmap/stop"
+            android:layout_marginEnd="69dp"
+            android:layout_alignTop="@+id/ibStart"
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
 

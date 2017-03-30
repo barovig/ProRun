@@ -4,18 +4,27 @@ package com.mad.k00191419.prorun.db;
 import android.location.Location;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class Run {
 
     private long mNo;
     private long mStartDate;
     private long mTotalTime;
-    private double mTotalDistance;
+    private float mTotalDistance;
     private long mTotalCalories;
     private double mAvgSpeed;
+    private Location mLastLocation;
+
+    @Override
+    public String toString() {
+        return String.format("No: %d\nStartDate: %d\nTotalTime: %d\nTotalDistance: %f\nTotalCalories: %d\n, AvgSpeed: %f\n",
+                mNo, mStartDate, mTotalTime, mTotalDistance, mTotalCalories, mAvgSpeed);
+    }
+
     private ArrayList<Location> mLocations;
 
-    public Run(long mNo, long mStartDate, long mTotalTime, double mTotalDistance, long mTotalCalories, double mAvgSpeed) {
+    public Run(long mNo, long mStartDate, long mTotalTime, float mTotalDistance, long mTotalCalories, double mAvgSpeed) {
         this.mNo = mNo;
         this.mStartDate = mStartDate;
         this.mTotalTime = mTotalTime;
@@ -49,11 +58,11 @@ public class Run {
         this.mTotalTime = mTotalTime;
     }
 
-    public double getTotalDistance() {
+    public float getTotalDistance() {
         return mTotalDistance;
     }
 
-    public void setTotalDistance(double mTotalDistance) {
+    public void setTotalDistance(float mTotalDistance) {
         this.mTotalDistance = mTotalDistance;
     }
 
@@ -80,4 +89,12 @@ public class Run {
     public void addLocation(Location location){
         mLocations.add(location);
     }
+
+
+
+
+
+
+
+
 }

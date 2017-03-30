@@ -2,6 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.mad.k00191419.prorun">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <permission
+        android:name="com.mad.k00191419.prorun.permission.MAPS_RECEIVE"
+        android:protectionLevel="signature" />
+    <uses-permission
+        android:name="com.mad.k00191419.prorun.permission.MAPS_RECEIVE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,11 +18,7 @@
         android:supportsRtl="true"
         android:theme="@style/Base.Theme.AppCompat.Light.DarkActionBar">
         <!-- Permissions -->
-        <permission
-            android:name="com.mad.k00191419.prorun.permission.MAPS_RECEIVE"
-            android:protectionLevel="signature" />
-        <uses-permission
-            android:name="com.mad.k00191419.prorun.permission.MAPS_RECEIVE" />
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -35,6 +39,7 @@
         <activity android:name=".activities.ViewGoalsActivity" />
         <activity android:name=".activities.SetGoalsActivity" />
         <activity android:name=".activities.MapActivity"></activity>
+        <service android:name=".services.ProRunService" />
     </application>
 
 </manifest>
