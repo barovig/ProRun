@@ -134,7 +134,8 @@ public class ProRunService extends Service implements LocationListener {
         // check permission and set listener
         if (ActivityCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
             /// HANDLE PERMISSION DENIAL
             return;
         }
@@ -160,7 +161,10 @@ public class ProRunService extends Service implements LocationListener {
     }
 
     public String[] getStats(){
-        return new String[]{ mDistance+"", mTime+"", mSpeed+"m/s"};
+        return new String[]{
+                Utils.formatDistance(mDistance),
+                Utils.formatInterval(mTime),
+                Utils.formatSpeed(mSpeed)};
     }
 
     public Run getRun(){

@@ -7,5 +7,19 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+    <!-- style for label textviews -->
+    <style xmlns:android="http://schemas.android.com/apk/res/android"
+        name="ProRunLabel" parent="AppTheme">
+        <item name="android:textColor">@color/prorun_text_darkblue</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 
+    <style xmlns:android="http://schemas.android.com/apk/res/android"
+        name="ProRunStatLabel" parent="AppTheme">
+        <item name="android:textColor">@color/prorun_stats_grey</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:typeface">monospace</item>
+    </style>
 </resources>

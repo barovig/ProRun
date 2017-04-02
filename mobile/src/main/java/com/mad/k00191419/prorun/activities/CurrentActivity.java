@@ -26,7 +26,7 @@ public class CurrentActivity extends AppCompatActivity
 
     // Constants
     private static final String APP_NAME = "__PRO_RUN";
-    private final long TIMER_INTERVAL = 200;
+    private final long TIMER_INTERVAL = 500;
 
     // Fields
     ProRunService   mService = null;
@@ -186,8 +186,11 @@ public class CurrentActivity extends AppCompatActivity
             @Override
             public void run() {
                 String[] stats = mService.getStats();
-                String time = stats[1],
-                        distance = stats[0], cal = "", speed = stats[2];
+                String  time = stats[1],
+                        distance = stats[0],
+                        cal = "",
+                        speed = stats[2];
+
                 tvCurrentDistance.setText(distance);
                 tvCurrentTime.setText(time);
                 tvCurrentCalories.setText(cal);

@@ -25,4 +25,11 @@ public class Utils {
         final long sec = TimeUnit.MILLISECONDS.toSeconds(interval - TimeUnit.HOURS.toMillis(hr) - TimeUnit.MINUTES.toMillis(min));
         return String.format("%02d:%02d:%02d", hr, min, sec);
     }
+
+    public static String formatCalories(final int cal){
+        return String.format("%d cal", cal);
+    }
+    public static String formatSpeed(float speed){
+        return String.format("%.2f m/s");
+    }
 }

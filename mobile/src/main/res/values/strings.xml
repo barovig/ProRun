@@ -28,6 +28,8 @@
 
     <string name="string_btn_open_map">See Route</string>
     <string name="google_maps_key">AIzaSyAvIKoslB3xohNJ7Ogcw3LIxU-k1EIEqH8</string>
+    <string name="string_history_label">History</string>
+    <string name="string_current_progress">Current Progress</string>
 
 
 </resources>

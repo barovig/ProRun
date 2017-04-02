@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#3b3b3d</color>
+    <color name="colorPrimaryDark">#1d1d1e</color>
+    <color name="colorAccent">#3747a3</color>
+    <color name="prorun_text_darkblue">#181e41</color>
+    <color name="prorun_stats_grey">#676a73</color>
 </resources>
