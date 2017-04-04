@@ -1,6 +1,10 @@
 package com.mad.k00191419.prorun.utils;
 
 
+import android.location.Location;
+
+import com.google.android.gms.maps.model.LatLng;
+
 import java.util.concurrent.TimeUnit;
 
 public class Utils {
@@ -26,10 +30,14 @@ public class Utils {
         return String.format("%02d:%02d:%02d", hr, min, sec);
     }
 
-    public static String formatCalories(final int cal){
-        return String.format("%d cal", cal);
+    public static String formatCalories(final float cal){
+        return String.format("%.0f cal", cal);
     }
     public static String formatSpeed(float speed){
-        return String.format("%.2f m/s");
+        return String.format("%.2f m/s", speed);
+    }
+
+    public static LatLng getLatLngFromLocation(Location loc){
+        return new LatLng(loc.getLatitude(), loc.getLongitude());
     }
 }

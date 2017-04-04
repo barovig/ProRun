@@ -18,7 +18,7 @@
     <style xmlns:android="http://schemas.android.com/apk/res/android"
         name="ProRunStatLabel" parent="AppTheme">
         <item name="android:textColor">@color/prorun_stats_grey</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">24sp</item>
         <item name="android:textStyle">normal</item>
         <item name="android:typeface">monospace</item>
     </style>

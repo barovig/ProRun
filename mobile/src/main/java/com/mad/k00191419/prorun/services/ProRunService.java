@@ -40,10 +40,11 @@ public class ProRunService extends Service implements LocationListener {
     private boolean         isRunning = false;
     private float           mDistance;
     private long            mTime;
-    private long            mCalories;
+    private float           mCalories;
     private float           mSpeed;
     private long            mStartDate;
     private Location        mLastLocation;
+    private float           mAccuracy;
 
     // inner Binder subclass
     public class LocalBinder extends Binder {
@@ -84,12 +85,18 @@ public class ProRunService extends Service implements LocationListener {
                         (mLastLocation == null) ? 0 : mLastLocation.distanceTo(location);
                 mTime += timeInterval;
                 mDistance += distInterval;
-                mSpeed = distInterval / (timeInterval / 1000);
+                mSpeed = location.getSpeed();
                 mRun.addLocation(location);
                 mLastLocation = location;
+                // calculate calories spend:
+                // http://fitness.stackexchange.com/questions/15608/energy-expenditure-calories-burned-equation-for-running
+                if(mSpeed > 1.0)        // don't count low speed movement contribution
+                    mCalories += 0.5*90*(0.2 * mSpeed*60 + 3.5);
                 Log.d(APP_NAME, String.format("D%f\tT%d\tS%f\t", mDistance, mTime, mSpeed));
             }
         }
+        // get location accuracy
+        mAccuracy = location.getAccuracy();
     }
 
     @Override
@@ -139,32 +146,31 @@ public class ProRunService extends Service implements LocationListener {
             /// HANDLE PERMISSION DENIAL
             return;
         }
-       // new GnssLocationProvider();
 
         mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, MIN_TIME_INTERVAL_MS, 1, this);
-        LocationProvider p = mLocationManager.getProvider(LocationManager.GPS_PROVIDER);
-        try {
-            Class classGpsProvider = Class.forName("com.android.server.location.GnssLocationProvider");
-            classGpsProvider.cast(p);
-        }
-        catch (Exception e){
-            String s = e.getMessage();
-        }
+
     }
 
     public void stopRun(){
         // create and add run ONLY after run is stopped
-        mDb.insertRun(mRun);
+        //mDb.insertRun(mRun);
         // clear Run obj
         mRun = null;
         isRunning = false;
+        mLocationManager.removeUpdates(this);
     }
 
+    //TODO: refactor - move calls to Utils to activity
     public String[] getStats(){
         return new String[]{
                 Utils.formatDistance(mDistance),
                 Utils.formatInterval(mTime),
-                Utils.formatSpeed(mSpeed)};
+                Utils.formatSpeed(mSpeed),
+                Utils.formatCalories(mCalories)};
+    }
+
+    public float getAccuracy(){
+        return mAccuracy;
     }
 
     public Run getRun(){

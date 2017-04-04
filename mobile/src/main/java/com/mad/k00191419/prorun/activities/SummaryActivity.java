@@ -42,6 +42,9 @@ public class SummaryActivity extends FragmentActivity implements View.OnClickLis
             case R.id.btnDetails:
                 Intent intent = new Intent(this, DetailsActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.btnOk:
+                finish();
         }
     }
 }
