@@ -5,6 +5,7 @@ import android.location.Location;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 public class Utils {
@@ -39,5 +40,13 @@ public class Utils {
 
     public static LatLng getLatLngFromLocation(Location loc){
         return new LatLng(loc.getLatitude(), loc.getLongitude());
+    }
+    public static String formatDate(final long millis){
+        Calendar c = Calendar.getInstance();
+        c.setTimeInMillis(millis);
+        return String.format("%d/%d/%d",
+                c.get(Calendar.DAY_OF_MONTH),
+                c.get(Calendar.MONTH),
+                c.get(Calendar.YEAR));
     }
 }

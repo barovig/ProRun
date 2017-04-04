@@ -22,6 +22,7 @@ import com.mad.k00191419.prorun.R;
 import com.mad.k00191419.prorun.services.ProRunService;
 import com.mad.k00191419.prorun.utils.Utils;
 
+import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -32,6 +33,12 @@ public class CurrentActivity extends AppCompatActivity
     private static final String APP_NAME = "__PRO_RUN";
     private static final int MY_PERMISSIONS_ACCESS_FINE_LOCATION = 300;
     private final long TIMER_INTERVAL = 500;
+    public static final String INTENT_KEY_DISTANCE = "Distance";
+    public static final String INTENT_KEY_TIME = "Time";
+    public static final String INTENT_KEY_AVG_SPEED = "AvgSpeed";
+    public static final String INTENT_KEY_CALORIES = "Calories";
+    public static final String INTENT_KEY_START_DATE = "StartDate";
+
 
     // Fields
     ProRunService   mService = null;
@@ -94,16 +101,12 @@ public class CurrentActivity extends AppCompatActivity
                 startPauseRun();
                 break;
             case R.id.btnOpenMap:
-                if(isServiceConnected) {
-                    Intent intent = new Intent(this, MapActivity.class);
-                    startActivity(intent);
-                }
-                else{
-                    Toast.makeText(this, "No route recorded yet", Toast.LENGTH_SHORT).show();
-                }
+                startMapActivity();
                 break;
         }
     }
+
+
 
     @Override
     public void onServiceConnected(ComponentName name, IBinder service) {
@@ -142,16 +145,17 @@ public class CurrentActivity extends AppCompatActivity
 
         if(checkSelfPermissionToAccessDeviceLocation()) {
             if (!isServiceConnected) connectToService();
-
             if (isStopped) {              // run if is stopped
                 isStopped = false;
                 mService.startRun();
                 startUiUpdater();
             } else if (isOnPause) {         // resume if on pause
                 isOnPause = false;
+                ibStartPause.setImageResource(R.mipmap.play);
                 mService.resumeRun();
             } else {                       // its running - pause service
                 isOnPause = true;
+                ibStartPause.setImageResource(R.mipmap.pause);
                 mService.pauseRun();
                 stopUiUpdater();
             }
@@ -177,13 +181,21 @@ public class CurrentActivity extends AppCompatActivity
     }
 
     private void stopRun() {
+        if(isStopped) return;
+        // start add summary data and start activity
+        Intent intent = new Intent(this, SummaryActivity.class);
+        String[] stats = mService.getStats();
+        intent.putExtra(INTENT_KEY_DISTANCE, stats[0]);
+        intent.putExtra(INTENT_KEY_TIME, stats[1]);
+        intent.putExtra(INTENT_KEY_AVG_SPEED, stats[2]);
+        intent.putExtra(INTENT_KEY_CALORIES, mService.getRun().getAvgSpeed()+"");
+        intent.putExtra(INTENT_KEY_START_DATE, Utils.formatDate(mStartTimeMs));
         // stop service
         mService.stopRun();
         isStopped = true;
         // finish this activity and don't return to it if navigating back.
         finish();
-        // start summary activity
-        Intent intent = new Intent(this, SummaryActivity.class);
+
         startActivity(intent);
     }
 
@@ -244,6 +256,16 @@ public class CurrentActivity extends AppCompatActivity
                 Log.d(APP_NAME,"Updated Accuracy: "+acc);
             }
         });
+    }
+
+    private void startMapActivity() {
+        if(isServiceConnected) {
+            Intent intent = new Intent(this, MapActivity.class);
+            startActivity(intent);
+        }
+        else{
+            Toast.makeText(this, "No route recorded yet", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private boolean checkSelfPermissionToAccessDeviceLocation(){

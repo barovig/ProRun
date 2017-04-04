@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -33,6 +35,12 @@ public class ProRunActivity extends AppCompatActivity implements View.OnClickLis
         setupListeners();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.prorun_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
     private void setupReferences() {
         tvProgress = (TextView) findViewById(R.id.tvProgress);
         pbGoalProgress = (ProgressBar)findViewById(R.id.pbGoalProgress);
@@ -59,6 +67,22 @@ public class ProRunActivity extends AppCompatActivity implements View.OnClickLis
                 break;
 
         }
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.menuGoals:
+                Intent intent = new Intent(this, ViewGoalsActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.menuSettings:
+                return true;
+            case R.id.menuAbout:
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+
+        }
     }
 }

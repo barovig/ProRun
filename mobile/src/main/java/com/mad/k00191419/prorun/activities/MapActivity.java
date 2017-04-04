@@ -113,14 +113,16 @@ public class MapActivity extends FragmentActivity
     public void onMapReady(GoogleMap googleMap) {
         map = googleMap;
         // when map is ready we want to zoom-in to accomodate entire run
-        LatLngBounds.Builder builder = new LatLngBounds.Builder();  //get builder
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();  // get builder
         List<Location> locs = mService.getRun().getLocations();     // get locations from run in service
-        builder.include(Utils.getLatLngFromLocation(locs.get(0)));  // add LatLong builded from Location's
-        builder.include(Utils.getLatLngFromLocation(locs.get(locs.size() - 1)));
-        // build 'bounds' object and move maps camera
-        LatLngBounds bounds = builder.build();
-        map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, MAP_PADDING));
-        displayRun();
+        if(locs.size() != 0) {
+            builder.include(Utils.getLatLngFromLocation(locs.get(0)));  // add LatLong builded from Location's
+            builder.include(Utils.getLatLngFromLocation(locs.get(locs.size() - 1)));
+            // build 'bounds' object and move maps camera
+            LatLngBounds bounds = builder.build();
+            map.moveCamera(CameraUpdateFactory.newLatLngBounds(bounds, MAP_PADDING));
+            displayRun();
+        }
     }
 
     @Override

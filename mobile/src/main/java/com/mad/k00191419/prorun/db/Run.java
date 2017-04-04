@@ -75,7 +75,12 @@ public class Run {
     }
 
     public double getAvgSpeed() {
-        return mAvgSpeed;
+
+        double avgSpeed = 0;
+        for(Location l : mLocations){
+            avgSpeed += l.getSpeed();
+        }
+        return avgSpeed / mLocations.size();
     }
 
     public void setAvgSpeed(double mAvgSpeed) {
