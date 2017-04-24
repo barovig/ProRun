@@ -4,6 +4,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.IBinder;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mad.k00191419.prorun.R;
+import com.mad.k00191419.prorun.db.Run;
 import com.mad.k00191419.prorun.services.ProRunService;
 import com.mad.k00191419.prorun.utils.Utils;
 
@@ -33,21 +35,17 @@ public class CurrentActivity extends AppCompatActivity
     private static final String APP_NAME = "__PRO_RUN";
     private static final int MY_PERMISSIONS_ACCESS_FINE_LOCATION = 300;
     private final long TIMER_INTERVAL = 500;
-    public static final String INTENT_KEY_DISTANCE = "Distance";
-    public static final String INTENT_KEY_TIME = "Time";
-    public static final String INTENT_KEY_AVG_SPEED = "AvgSpeed";
-    public static final String INTENT_KEY_CALORIES = "Calories";
-    public static final String INTENT_KEY_START_DATE = "StartDate";
-
+    public static final String INTENT_KEY_RUN = "run";
 
     // Fields
-    ProRunService   mService = null;
-    boolean         isServiceConnected = false;
-    boolean         isOnPause = false;
-    boolean         isStopped = true;
-    long            mStartTimeMs;
-    Timer           mTimer;
-    Handler         mUiHandler;     // used to update UI thread from timer
+    ProRunService       mService = null;
+    boolean             isServiceConnected = false;
+    boolean             isOnPause = false;
+    boolean             isStopped = true;
+    long                mStartTimeMs;
+    Timer               mTimer;
+    Handler             mUiHandler;     // used to update UI thread from timer
+    SharedPreferences   mPref;
 
     // View References
     ImageButton     ibStop;
@@ -145,7 +143,7 @@ public class CurrentActivity extends AppCompatActivity
 
         if(checkSelfPermissionToAccessDeviceLocation()) {
             if (!isServiceConnected) connectToService();
-            if (isStopped) {              // run if is stopped
+            if (isStopped) {              // start run when stopped
                 isStopped = false;
                 mService.startRun();
                 startUiUpdater();
@@ -153,7 +151,7 @@ public class CurrentActivity extends AppCompatActivity
                 isOnPause = false;
                 ibStartPause.setImageResource(R.mipmap.play);
                 mService.resumeRun();
-            } else {                       // its running - pause service
+            } else {                       // pause service if is running
                 isOnPause = true;
                 ibStartPause.setImageResource(R.mipmap.pause);
                 mService.pauseRun();
@@ -182,14 +180,10 @@ public class CurrentActivity extends AppCompatActivity
 
     private void stopRun() {
         if(isStopped) return;
-        // start add summary data and start activity
+        // Get run obj and add to intent
+        Run run = mService.getRun();
         Intent intent = new Intent(this, SummaryActivity.class);
-        String[] stats = mService.getStats();
-        intent.putExtra(INTENT_KEY_DISTANCE, stats[0]);
-        intent.putExtra(INTENT_KEY_TIME, stats[1]);
-        intent.putExtra(INTENT_KEY_AVG_SPEED, stats[2]);
-        intent.putExtra(INTENT_KEY_CALORIES, mService.getRun().getAvgSpeed()+"");
-        intent.putExtra(INTENT_KEY_START_DATE, Utils.formatDate(mStartTimeMs));
+        intent.putExtra(INTENT_KEY_RUN, run);
         // stop service
         mService.stopRun();
         isStopped = true;

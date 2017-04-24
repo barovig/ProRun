@@ -10,7 +10,21 @@ import java.util.concurrent.TimeUnit;
 
 public class Utils {
 
+
     public static String formatDistance(float distance) {
+        int m = (int)distance % 1000;
+        int km = (int)distance / 1000;
+        String out;
+
+        if (km < 0)
+            out = String.format(" %d m", m);
+        else
+            out = String.format("%d km %d m", km, m);
+
+        return out;
+    }
+
+    public static String formatDistance(double distance) {
         int m = (int)distance % 1000;
         int km = (int)distance / 1000;
         String out;
@@ -37,7 +51,9 @@ public class Utils {
     public static String formatSpeed(float speed){
         return String.format("%.2f m/s", speed);
     }
-
+    public static String formatSpeed(double speed){
+        return String.format("%.2f m/s", speed);
+    }
     public static LatLng getLatLngFromLocation(Location loc){
         return new LatLng(loc.getLatitude(), loc.getLongitude());
     }
@@ -48,5 +64,10 @@ public class Utils {
                 c.get(Calendar.DAY_OF_MONTH),
                 c.get(Calendar.MONTH),
                 c.get(Calendar.YEAR));
+    }
+
+    public static long getCurrentTimeMillis(){
+        Calendar c = Calendar.getInstance();
+        return c.getTimeInMillis();
     }
 }

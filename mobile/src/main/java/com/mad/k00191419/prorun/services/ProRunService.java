@@ -152,9 +152,9 @@ public class ProRunService extends Service implements LocationListener {
     }
 
     public void stopRun(){
-        // create and add run ONLY after run is stopped
-        //mDb.insertRun(mRun);
-        // clear Run obj
+//       create and add run ONLY after run is stopped
+        mDb.insertRun(mRun);
+//         clear Run obj
         mRun = null;
         isRunning = false;
         mLocationManager.removeUpdates(this);

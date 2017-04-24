@@ -12,9 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_weight="0.2"
+        android:layout_weight="0.16"
         android:gravity="center_vertical|center_horizontal"
-        android:text="@string/string_label_goals" />
+        android:text="@string/string_label_goals"
+        android:textAppearance="@style/ProRunLabel" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -25,10 +26,10 @@
             android:id="@+id/tvLabelDaily"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:text="@string/string_label_daily"
             android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            android:text="@string/string_label_daily" />
+            android:layout_centerHorizontal="true" />
 
         <ProgressBar
             android:id="@+id/pbDailyDistance"
@@ -63,19 +64,37 @@
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="200dp"
-            android:layout_below="@+id/tvLabelDailyCalories"
             android:layout_alignStart="@+id/tvLabelDailyCalories"
-            android:layout_marginTop="19dp" />
+            android:layout_below="@+id/tvLabelDailyCalories"
+            android:layout_marginTop="19dp"
+            android:minWidth="200dp" />
 
         <Button
             android:id="@+id/btnSetGoalDaily"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:layout_marginEnd="17dp"
-            android:text="@string/string_btn_setgoal" />
+            android:layout_marginEnd="16dp"
+            android:text="@string/string_btn_setgoal"
+            android:layout_alignTop="@+id/pbDailyDistance"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:id="@+id/tvDailyDistPercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvLabelDailyDistance"
+            android:layout_alignBottom="@+id/tvLabelDailyDistance"
+            android:layout_marginStart="7dp"
+            android:layout_toEndOf="@+id/tvLabelDailyDistance"
+            android:text="N/A" />
+
+        <TextView
+            android:id="@+id/tvDailyCalPercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/pbDailyCalories"
+            android:layout_alignStart="@+id/tvDailyDistPercent"
+            android:text="N/A" />
 
     </RelativeLayout>
 
@@ -92,6 +111,16 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="15dp"
             android:text="@string/string_label_weekly" />
+
+        <TextView
+            android:id="@+id/tvWeeklyDistPercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvLabelWeeklyDistance"
+            android:layout_alignBottom="@+id/tvLabelWeeklyDistance"
+            android:layout_marginStart="7dp"
+            android:layout_toEndOf="@+id/tvLabelWeeklyDistance"
+            android:text="N/A" />
 
         <ProgressBar
             android:id="@+id/pbWeeklyDistance"
@@ -120,6 +149,14 @@
             android:layout_below="@+id/pbWeeklyDistance"
             android:layout_marginTop="18dp"
             android:text="@string/string_label_calories" />
+
+        <TextView
+            android:id="@+id/tvWeeklyCalPercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/pbWeeklyCalories"
+            android:layout_alignStart="@+id/tvWeeklyDistPercent"
+            android:text="N/A" />
 
         <ProgressBar
             android:id="@+id/pbWeeklyCalories"
@@ -176,6 +213,16 @@
             android:text="@string/string_label_distance" />
 
         <TextView
+            android:id="@+id/tvMonthlyDistPercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tvLabelMonthlyDistance"
+            android:layout_alignBottom="@+id/tvLabelMonthlyDistance"
+            android:layout_marginStart="7dp"
+            android:layout_toEndOf="@+id/tvLabelMonthlyDistance"
+            android:text="N/A" />
+
+        <TextView
             android:id="@+id/tvLabelMonthlyCalories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -184,15 +231,23 @@
             android:layout_marginTop="18dp"
             android:text="@string/string_label_calories" />
 
+        <TextView
+            android:id="@+id/tvMonthlyCalPercent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/pbMonthlyCalories"
+            android:layout_alignStart="@+id/tvMonthlyDistPercent"
+            android:text="N/A" />
+
         <ProgressBar
             android:id="@+id/pbMonthlyCalories"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="200dp"
-            android:layout_below="@+id/tvLabelMonthlyCalories"
             android:layout_alignStart="@+id/tvLabelMonthlyCalories"
-            android:layout_marginTop="19dp" />
+            android:layout_below="@+id/tvLabelMonthlyCalories"
+            android:layout_marginTop="19dp"
+            android:minWidth="200dp" />
 
         <Button
             android:id="@+id/btnSetGoalMonthly"

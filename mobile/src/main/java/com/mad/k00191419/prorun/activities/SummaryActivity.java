@@ -8,7 +8,11 @@ import android.view.View;
 import android.widget.Button;
 
 import com.mad.k00191419.prorun.R;
+import com.mad.k00191419.prorun.db.Goal;
+import com.mad.k00191419.prorun.db.ProRunDB;
+import com.mad.k00191419.prorun.db.Run;
 import com.mad.k00191419.prorun.fragments.SummaryFragment;
+import com.mad.k00191419.prorun.utils.Utils;
 
 public class SummaryActivity extends FragmentActivity implements View.OnClickListener{
 
@@ -16,6 +20,10 @@ public class SummaryActivity extends FragmentActivity implements View.OnClickLis
     // View References
     Button btnDetails;
     Button btnOk;
+
+    // Fields
+    ProRunDB mDb;
+    Run mRun;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,12 +37,15 @@ public class SummaryActivity extends FragmentActivity implements View.OnClickLis
     }
 
     private void updateFromIntent() {
+        // Get run obj from intent and format data
         Intent intent = getIntent();
-        String distance = intent.getStringExtra(CurrentActivity.INTENT_KEY_DISTANCE);
-        String time = intent.getStringExtra(CurrentActivity.INTENT_KEY_TIME);
-        String avgSpeed = intent.getStringExtra(CurrentActivity.INTENT_KEY_AVG_SPEED);
-        String calories = intent.getStringExtra(CurrentActivity.INTENT_KEY_CALORIES);
-        String startDate = intent.getStringExtra(CurrentActivity.INTENT_KEY_START_DATE);
+        mRun = intent.getParcelableExtra(CurrentActivity.INTENT_KEY_RUN);
+        if(mRun == null) return;    // null ref check
+        String distance = Utils.formatDistance(mRun.getTotalDistance());
+        String time = Utils.formatInterval(mRun.getTotalTime());
+        String avgSpeed = Utils.formatSpeed(mRun.getAvgSpeed());
+        String calories = Utils.formatCalories(mRun.getTotalCalories());
+        String startDate = Utils.formatDate(mRun.getStartDate());
 
         SummaryFragment f = (SummaryFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_summary);
         // set textviews using fragment's public method
@@ -64,15 +75,41 @@ public class SummaryActivity extends FragmentActivity implements View.OnClickLis
         switch(id){
             case R.id.btnDetails:
                 Intent intent = new Intent(this, DetailsActivity.class);
+                intent.putExtra(CurrentActivity.INTENT_KEY_RUN, mRun);
                 startActivity(intent);
                 break;
             case R.id.btnOk:
+
                 finish();
         }
     }
 
     public void getGoals() {
-        //TODO: Get goals from DB, calculate progress and display it
+        if(mDb == null)
+            mDb = new ProRunDB(this);
+        if( mRun == null) return;   // null ref check
+
+        Goal daily = mDb.getDailyGoal().updateFromRun(mRun);
+        Goal weekly = mDb.getWeeklyGoal().updateFromRun(mRun);
+        Goal monthly = mDb.getMonthlyGoal().updateFromRun(mRun);
+
+        // get updated progress
+        int dailyProg = daily.getTotalProgress();
+        int weeklyProg = weekly.getTotalProgress();
+        int monthlyProg = monthly.getTotalProgress();
+
+        // set progressbars values
+        SummaryFragment f = (SummaryFragment)getSupportFragmentManager().findFragmentById(R.id.fragment_summary);
+        if(f != null){
+            f.setProgressBarProgress(R.id.pbDaily, dailyProg);
+            f.setProgressBarProgress(R.id.pbWeekly, weeklyProg);
+            f.setProgressBarProgress(R.id.pbMonthly, monthlyProg);
+        }
+
+        // update goal values
+        mDb.updateGoal(daily);
+        mDb.updateGoal(weekly);
+        mDb.updateGoal(monthly);
     }
 
 }

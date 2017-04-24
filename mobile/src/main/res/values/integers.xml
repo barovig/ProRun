@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="int_max_progress">100</integer>
+    <integer name="int_prefs_weight_default">0</integer>
+</resources>

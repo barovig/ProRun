@@ -7,13 +7,13 @@ public class Goal {
         DAILY, WEEKLY, MONTHLY
     }
 
-    private Type mType;
-    private int mId;
-    private long  mDate;
-    private double mTargetDistance;
-    private double mCurrentDistance;
-    private long mTargetCalories;
-    private long mCurrentCalories;
+    private Type    mType;
+    private int     mId;
+    private long    mDate;
+    private double  mTargetDistance;
+    private double  mCurrentDistance;
+    private long    mTargetCalories;
+    private long    mCurrentCalories;
 
     public Goal(Type mType, int mId, long mDate, double mTargetDistance, double mCurrentDistance, long mTargetCalories, long mCurrentCalories) {
         this.mType = mType;
@@ -23,6 +23,17 @@ public class Goal {
         this.mCurrentDistance = mCurrentDistance;
         this.mTargetCalories = mTargetCalories;
         this.mCurrentCalories = mCurrentCalories;
+    }
+
+    // copy constructor
+    public Goal(Goal goal){
+        this.mType = goal.getType();
+        this.mId = goal.getId();
+        this.mDate = goal.getDate();
+        this.mTargetDistance = goal.getTargetDistance();
+        this.mCurrentDistance = goal.getCurrentDistance();
+        this.mTargetCalories = goal.getTargetCalories();
+        this.mCurrentCalories = goal.getCurrentCalories();
     }
 
     public Type getType() {
@@ -79,5 +90,45 @@ public class Goal {
 
     public void setCurrentCalories(long mCurrentCalories) {
         this.mCurrentCalories = mCurrentCalories;
+    }
+
+    public int getTotalProgress()
+    {
+        int distPrg, calPrg;
+
+        distPrg = getDistanceProgress();
+        calPrg = getCaloriesProgress();
+
+        return (distPrg + calPrg) / 2;
+    }
+
+    public int getDistanceProgress(){
+        double distPrg;
+        if(mTargetDistance == 0){
+            distPrg = 100;
+        }
+        else{
+            double distDelta = mTargetDistance - mCurrentDistance;
+            distPrg = (distDelta < 0) ? 100 : (mCurrentDistance / mTargetDistance) * 100;
+        }
+        return (int)distPrg;
+    }
+
+    public int getCaloriesProgress(){
+        double calPrg;
+        if(mTargetCalories == 0){
+            calPrg = 100;
+        }
+        else {
+            double calDelta = mTargetCalories - mCurrentCalories;
+            calPrg = (calDelta < 0) ? 100 : (mCurrentCalories / mTargetCalories) * 100;
+        }
+        return (int)calPrg;
+    }
+    // updates current goal with calories and distance info from passed Run
+    public Goal updateFromRun(Run run){
+        mCurrentCalories += run.getTotalCalories();
+        mCurrentDistance += run.getTotalDistance();
+        return this;
     }
 }

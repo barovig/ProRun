@@ -5,4 +5,5 @@
     <color name="colorAccent">#3747a3</color>
     <color name="prorun_text_darkblue">#181e41</color>
     <color name="prorun_stats_grey">#676a73</color>
+    <color name="colour_list_run">#d6dfe7</color>
 </resources>

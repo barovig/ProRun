@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <ListPreference
+        android:entries="@array/listpref_gender_names"
+        android:entryValues="@array/listpref_gender_values"
+        android:key="PREF_GENDER"
+        android:summary="@string/string_prefs_gender_summary"
+        android:title="@string/string_prefs_gender" />
+    <EditTextPreference
+        android:defaultValue="@string/string_prefs_weight_default"
+        android:key="PREF_WEIGHT"
+        android:selectAllOnFocus="true"
+        android:inputType="number"
+        android:singleLine="true"
+        android:summary="@string/string_prefs_weight_summary"
+        android:title="@string/string_prefs_weight" />
+    <Preference
+        android:key="PREF_CLEAR_HISTORY"
+        android:summary="@string/string_prefs_clear_summary"
+        android:title="@string/string_prefs_clear" />
+</PreferenceScreen>

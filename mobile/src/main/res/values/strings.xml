@@ -15,14 +15,16 @@
     <string name="string_label_monthly_prog">Progress to Monthly Goal</string>
     <string name="string_label_weekly_prog">Progress to Weekly Goal</string>
     <string name="string_label_history">History</string>
-    <string name="string_label_goals">Goals</string>
+    <string name="string_label_goals">Progress and Goals</string>
     <string name="string_label_daily">Daily</string>
     <string name="string_label_weekly">Weekly</string>
     <string name="string_label_monthly">Monthly</string>
-
-    <string name="string_label_distance">Distance</string>
-    <string name="string_label_calories">Calories</string>
-    <string name="string_btn_setgoal">Set Goal</string>
+    <string name="string_label_weekly_goal">Weekly Goals</string>
+    <string name="string_label_daily_goal">Daily Goals</string>
+    <string name="string_label_monthly_goal">Monthly Goals</string>
+    <string name="string_label_distance">Distance:</string>
+    <string name="string_label_calories">Calories:</string>
+    <string name="string_btn_setgoal">Goal</string>
     <string name="string_btn_save">Save</string>
     <string name="string_btn_cancel">Cancel</string>
 
@@ -32,8 +34,19 @@
     <string name="string_current_progress">Current Progress</string>
     <string name="string_gps_acc_label">GPS Accuracy:</string>
     <string name="string_menu_settings">Settings</string>
-    <string name="string_menu_goals">Goals</string>
+    <string name="string_menu_goals">Progress and Goals</string>
     <string name="string_menu_about">About</string>
+    <string name="string_prefs_gender">Gender</string>
+    <string name="string_prefs_gender_summary">Please select your gender</string>
+    <string name="string_prefs_weight_summary">Please input your weight</string>
+    <string name="string_prefs_weight">Weight</string>
+    <string name="string_prefs_weight_default">0</string>
+    <string name="string_prefs_clear">Clear History</string>
+    <string name="string_prefs_clear_summary">Clears the history of previous runs</string>
 
-
+    <string name="string_label_about">Application by K00191419</string>
+    <string name="string_alert_title_clear_history">Clear History</string>
+    <string name="string_alert_message_clear_history">Are you sure you want to delete history of ALL previous runs?</string>
+    <string name="string_alert_toast_clear_history">History has been deleted</string>
+    <string name="string_alert_toast_goal_saved">Goal has been saved</string>
 </resources>

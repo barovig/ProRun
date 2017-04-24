@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.mad.k00191419.prorun.R;
@@ -45,6 +46,15 @@ public class SummaryFragment extends Fragment {
         if(view != null && view instanceof TextView){
             TextView tView = (TextView)mView.findViewById(id);
             tView.setText(text);
+        }
+    }
+
+    public void setProgressBarProgress(int id, int progress){
+        View view = mView.findViewById(id);
+
+        if(view != null && view instanceof ProgressBar){
+            ProgressBar pb = (ProgressBar) mView.findViewById(id);
+            pb.setProgress(progress);
         }
     }
 
