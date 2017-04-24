@@ -133,4 +133,16 @@ public class Run implements Parcelable {
         mTotalDistance = in.readFloat();
         mAvgSpeed = in.readDouble();
     }
+
+    public float getHighestSpeed() {
+        if (mLocations == null) return 0;
+        else
+        {
+            float maxSpeed = 0;
+            for(Location l : mLocations){
+                if(l.getSpeed() > maxSpeed) maxSpeed = l.getSpeed();
+            }
+            return maxSpeed;
+        }
+    }
 }

@@ -49,4 +49,8 @@
     <string name="string_alert_message_clear_history">Are you sure you want to delete history of ALL previous runs?</string>
     <string name="string_alert_toast_clear_history">History has been deleted</string>
     <string name="string_alert_toast_goal_saved">Goal has been saved</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="string_label_highest_speed">Highest Speed</string>
 </resources>

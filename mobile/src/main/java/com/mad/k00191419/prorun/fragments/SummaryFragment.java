@@ -9,6 +9,8 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.mad.k00191419.prorun.R;
+import com.mad.k00191419.prorun.db.Run;
+import com.mad.k00191419.prorun.utils.Utils;
 
 import org.w3c.dom.Text;
 
@@ -20,9 +22,12 @@ public class SummaryFragment extends Fragment {
 //    TextView tvAvgSpeed;
 //    TextView tvTotalCalories;
 //    TextView tvStartDate;
-//    TextView tvProgressDaily;
-//    TextView tvProgressWeekly;
-//    TextView tvProgressMonthly;
+//    TextView tvLabelProgressDaily;
+//    TextView tvLabelProgressWeekly;
+//    TextView tvLabelProgressMonthly;
+//    ProgressBar pbDaily;
+//    ProgressBar pbWeekly;
+//    ProgressBar pbMonthly;
 
     private View mView = null;
 
@@ -36,7 +41,7 @@ public class SummaryFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mView = inflater.inflate(R.layout.fragment_summary, container, false);
-        //setupReferences(view);
+//        setupReferences(mView);
         return mView;
     }
 
@@ -61,13 +66,18 @@ public class SummaryFragment extends Fragment {
 //    private void setupReferences(View view){
 //        tvTotalDistance = (TextView)view.findViewById(R.id.tvTotalDistance);
 //        tvSummaryTime = (TextView)view.findViewById(R.id.tvSummaryTime);
-//        tvCurrentSpeed = (TextView)view.findViewById(R.id.tvAvgSpeed);
-//        tvCurrentCalories = (TextView)view.findViewById(R.id.tvTotalCalories);
+//        tvAvgSpeed = (TextView)view.findViewById(R.id.tvAvgSpeed);
+//        tvTotalCalories = (TextView)view.findViewById(R.id.tvTotalCalories);
 //        tvStartDate = (TextView)view.findViewById(R.id.tvStartDate);
-//        tvProgressDaily = (TextView)view.findViewById(R.id.tvProgressDaily);
-//        tvProgressWeekly = (TextView)view.findViewById(R.id.tvProgressWeekly);
-//        tvProgressMonthly = (TextView)view.findViewById(R.id.tvProgressMonthly);
+//        tvLabelProgressDaily = (TextView)view.findViewById(R.id.tvLabelProgressDaily);
+//        tvLabelProgressWeekly = (TextView)view.findViewById(R.id.tvLabelProgressWeekly);
+//        tvLabelProgressMonthly = (TextView)view.findViewById(R.id.tvLabelProgressMonthly);
+//
+//        pbDaily = (ProgressBar)view.findViewById(R.id.pbDaily);
+//        pbWeekly = (ProgressBar)view.findViewById(R.id.pbWeekly);
+//        pbMonthly = (ProgressBar)view.findViewById(R.id.pbMonthly);
 //    }
+
 
 
 }
