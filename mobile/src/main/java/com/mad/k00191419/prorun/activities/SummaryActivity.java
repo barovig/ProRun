@@ -40,10 +40,11 @@ public class SummaryActivity extends FragmentActivity implements View.OnClickLis
         // Get run obj from intent and format data
         Intent intent = getIntent();
         mRun = intent.getParcelableExtra(CurrentActivity.INTENT_KEY_RUN);
+        double avg = intent.getDoubleExtra(CurrentActivity.INTENT_KEY_AVG,0);
         if(mRun == null) return;    // null ref check
         String distance = Utils.formatDistance(mRun.getTotalDistance());
         String time = Utils.formatInterval(mRun.getTotalTime());
-        String avgSpeed = Utils.formatSpeed(mRun.getAvgSpeed());
+        String avgSpeed = Utils.formatSpeed(avg);
         String calories = Utils.formatCalories(mRun.getTotalCalories());
         String startDate = Utils.formatDate(mRun.getStartDate());
 

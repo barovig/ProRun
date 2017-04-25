@@ -1,6 +1,7 @@
 package com.mad.k00191419.prorun.services;
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -14,9 +15,16 @@ import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+
+import com.mad.k00191419.prorun.R;
 import com.mad.k00191419.prorun.db.ProRunDB;
 import com.mad.k00191419.prorun.db.Run;
 import com.mad.k00191419.prorun.utils.Utils;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
+import android.support.v4.app.NotificationCompat.WearableExtender;
+
+
 //import com.android.server.*
 
 import java.text.NumberFormat;
@@ -76,14 +84,14 @@ public class ProRunService extends Service implements LocationListener {
     @Override
     public void onLocationChanged(Location location) {
         if(isRunning) {
+            Calendar c = Calendar.getInstance();
             long locTime = location.getTime();
             Log.d(APP_NAME, String.format("S:%d\tL:%d\n", mStartDate, locTime));
             if(locTime > mStartDate) {    // skip locations before startDate
                 // update stats
-                long timeInterval = (locTime - mStartDate);
                 float distInterval =
                         (mLastLocation == null) ? 0 : mLastLocation.distanceTo(location);
-                mTime += timeInterval;
+                mTime += c.getTimeInMillis() - mStartDate;
                 mDistance += distInterval;
                 mSpeed = location.getSpeed();
                 mRun.addLocation(location);
@@ -93,10 +101,28 @@ public class ProRunService extends Service implements LocationListener {
                 if(mSpeed > 1.0)        // don't count low speed movement contribution
                     mCalories += 0.5*90*(0.2 * mSpeed*60 + 3.5);
                 Log.d(APP_NAME, String.format("D%f\tT%d\tS%f\t", mDistance, mTime, mSpeed));
+
+                notifyWearable();
             }
         }
         // get location accuracy
         mAccuracy = location.getAccuracy();
+    }
+
+    private void notifyWearable() {
+//        int notificationId = 001;
+//// Build intent for notification content
+//        Intent viewIntent = new Intent(this, ProRunDisplayActivity.class);
+//        viewIntent.putExtra(EXTRA_EVENT_ID, eventId);
+//        PendingIntent viewPendingIntent =
+//                PendingIntent.getActivity(this, 0, viewIntent, 0);
+//
+//        NotificationCompat.Builder notificationBuilder =
+//                new NotificationCompat.Builder(this)
+//                        .setSmallIcon(R.drawable.ic_event)
+//                        .setContentTitle(eventTitle)
+//                        .setContentText(eventLocation)
+//                        .setContentIntent(viewPendingIntent);
     }
 
     @Override
@@ -114,8 +140,12 @@ public class ProRunService extends Service implements LocationListener {
 
     }
 
+    public boolean isRunning(){
+        return mRun != null;
+    }
     public void startRun(){
-        mStartDate = System.currentTimeMillis();
+        Calendar c = Calendar.getInstance();
+        mStartDate = c.getTimeInMillis();
         // get next run's ID
         mRunNo = mDb.getNextRunNo();
         // create Run object
@@ -153,6 +183,11 @@ public class ProRunService extends Service implements LocationListener {
 
     public void stopRun(){
 //       create and add run ONLY after run is stopped
+        mRun.setStartDate(mStartDate);
+        mRun.setTotalDistance(mDistance);
+        mRun.setTotalCalories((long) mCalories);
+        mRun.setTotalTime(mTime);
+        mRun.getAvgSpeed();
         mDb.insertRun(mRun);
 //         clear Run obj
         mRun = null;

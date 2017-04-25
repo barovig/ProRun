@@ -77,6 +77,7 @@ public class ProRunActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         setupListView();
+        setupGoals();
     }
 
     @Override

@@ -24,6 +24,7 @@ import com.mad.k00191419.prorun.db.Run;
 import com.mad.k00191419.prorun.services.ProRunService;
 import com.mad.k00191419.prorun.utils.Utils;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -36,7 +37,8 @@ public class CurrentActivity extends AppCompatActivity
     private static final int MY_PERMISSIONS_ACCESS_FINE_LOCATION = 300;
     private final long TIMER_INTERVAL = 500;
     public static final String INTENT_KEY_RUN = "run";
-
+    public static final String INTENT_KEY_AVG = "avg";
+    public static final String INTENT_KEY_MAX = "max";
     // Fields
     ProRunService       mService = null;
     boolean             isServiceConnected = false;
@@ -146,6 +148,7 @@ public class CurrentActivity extends AppCompatActivity
             if (isStopped) {              // start run when stopped
                 isStopped = false;
                 mService.startRun();
+                ibStartPause.setImageResource(R.mipmap.pause);
                 startUiUpdater();
             } else if (isOnPause) {         // resume if on pause
                 isOnPause = false;
@@ -184,6 +187,9 @@ public class CurrentActivity extends AppCompatActivity
         Run run = mService.getRun();
         Intent intent = new Intent(this, SummaryActivity.class);
         intent.putExtra(INTENT_KEY_RUN, run);
+        intent.putExtra(INTENT_KEY_AVG, run.getAvgSpeed());
+        intent.putExtra(CurrentActivity.INTENT_KEY_MAX, run.getHighestSpeed());
+
         // stop service
         mService.stopRun();
         isStopped = true;
@@ -210,13 +216,14 @@ public class CurrentActivity extends AppCompatActivity
         mUiHandler.post(new Runnable() {
             @Override
             public void run() {
+                Calendar c = Calendar.getInstance();
                 String[] stats = mService.getStats();
                 String  distance = stats[0],
                         speed = stats[2],
                         cal = stats[3];
 
                 tvCurrentDistance.setText(distance);
-                tvCurrentTime.setText(Utils.formatInterval(System.currentTimeMillis() - mStartTimeMs));
+                tvCurrentTime.setText(Utils.formatInterval(c.getTimeInMillis() - mStartTimeMs));
                 tvCurrentCalories.setText(cal);
                 tvCurrentSpeed.setText(speed);
                 Log.d(APP_NAME,"Updated UI\n\tSpeed: "+speed+"\n\tDistance: "+distance);
@@ -253,7 +260,7 @@ public class CurrentActivity extends AppCompatActivity
     }
 
     private void startMapActivity() {
-        if(isServiceConnected) {
+        if(isServiceConnected && mService.isRunning()) {
             Intent intent = new Intent(this, MapActivity.class);
             startActivity(intent);
         }

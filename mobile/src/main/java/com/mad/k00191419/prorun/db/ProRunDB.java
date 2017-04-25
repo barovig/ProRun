@@ -327,11 +327,11 @@ public class ProRunDB {
         } else {
             try {
                 Run r = new Run(
-                        cursor.getInt(RUN_NO_COL),
-                        cursor.getInt(RUN_START_DATE_COL),
-                        cursor.getInt(RUN_TOTAL_TIME_COL),
+                        cursor.getLong(RUN_NO_COL),
+                        cursor.getLong(RUN_START_DATE_COL),
+                        cursor.getLong(RUN_TOTAL_TIME_COL),
                         cursor.getFloat(RUN_TOTAL_DISTANCE_COL),
-                        cursor.getInt(RUN_TOTAL_CALORIES_COL),
+                        cursor.getLong(RUN_TOTAL_CALORIES_COL),
                         cursor.getDouble(RUN_AVG_SPEED_COL));
                 return r;
             } catch (Exception e) {

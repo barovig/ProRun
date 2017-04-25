@@ -38,7 +38,7 @@ public class SetGoalsActivity extends AppCompatActivity
     Goal     mGoal;
     Calendar mToday;
     int      mDailyMaxDistance = 10000;
-    int      mDailyMaxCalories = 3000;
+    int      mDailyMaxCalories = 3000000;
     int      mStepDivisor = 20;
     int      mStepDist;
     int      mStepCal;
@@ -75,7 +75,7 @@ public class SetGoalsActivity extends AppCompatActivity
                 maxDist = mDailyMaxDistance * 30;
                 mStepDist = maxDist / mStepDivisor;
                 maxCal = mDailyMaxCalories * 30;
-                mStepDist = maxCal / mStepDivisor;
+                mStepCal = maxCal / mStepDivisor;
                 break;
             default:
                 maxDist = 0;

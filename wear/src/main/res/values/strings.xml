@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">ProRun</string>
-    <string name="hello_round">Hello Round World!</string>
-    <string name="hello_square">Hello Square World!</string>
+    <string name="string_label_current_distance">Distance:</string>
+    <string name="string_label_current_time">Time:</string>
+    <string name="string_label_current_speed">Speed:</string>
+
+    <string name="hello">Hello World!</string>
+    <string name="title">Hello Notification!</string>
+    <string name="notification_posted">Notification posted</string>
 </resources>

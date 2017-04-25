@@ -1,6 +1,7 @@
 package com.mad.k00191419.prorun.utils;
 
 
+import java.text.SimpleDateFormat;
 import android.location.Location;
 
 import com.google.android.gms.maps.model.LatLng;
@@ -46,7 +47,7 @@ public class Utils {
     }
 
     public static String formatCalories(final float cal){
-        return String.format("%.0f cal", cal);
+        return String.format("%.0f kcal", cal / 1000);
     }
     public static String formatSpeed(float speed){
         return String.format("%.2f m/s", speed);
@@ -59,11 +60,9 @@ public class Utils {
     }
     public static String formatDate(final long millis){
         Calendar c = Calendar.getInstance();
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
         c.setTimeInMillis(millis);
-        return String.format("%d/%d/%d",
-                c.get(Calendar.DAY_OF_MONTH),
-                c.get(Calendar.MONTH),
-                c.get(Calendar.YEAR));
+        return format.format(c.getTime());
     }
 
     public static long getCurrentTimeMillis(){

@@ -81,10 +81,15 @@ public class Run implements Parcelable {
             return 0;
 
         double avgSpeed = 0;
+        long count = 0;
         for(Location l : mLocations){
-            avgSpeed += l.getSpeed();
+            if(l.hasSpeed()) {
+                avgSpeed += l.getSpeed();
+                count++;
+            }
         }
-        return avgSpeed / mLocations.size();
+        mAvgSpeed = avgSpeed / count;
+        return mAvgSpeed;
     }
 
     public void setAvgSpeed(double mAvgSpeed) {
@@ -139,8 +144,12 @@ public class Run implements Parcelable {
         else
         {
             float maxSpeed = 0;
+            long count = 0;
             for(Location l : mLocations){
-                if(l.getSpeed() > maxSpeed) maxSpeed = l.getSpeed();
+                if(l.hasSpeed()) {
+                    if (l.getSpeed() > maxSpeed)
+                        maxSpeed = l.getSpeed();
+                }
             }
             return maxSpeed;
         }

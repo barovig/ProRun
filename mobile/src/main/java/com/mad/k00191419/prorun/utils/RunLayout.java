@@ -52,10 +52,8 @@ implements View.OnClickListener{
     }
 
     public void setRunText(Run run) {
-        Date date = new Date(run.getStartDate());
-        Format format = new SimpleDateFormat("EEE dd/mm/yyyy");
         mRun = run;
-        tvRunDate.setText(format.format(date));
+        tvRunDate.setText(Utils.formatDate(mRun.getStartDate()));
         tvTime.setText(Utils.formatInterval(run.getTotalTime()));
         tvDistance.setText(Utils.formatDistance(run.getTotalDistance()));
     }
@@ -64,6 +62,8 @@ implements View.OnClickListener{
     public void onClick(View v) {
         Intent intent = new Intent(mContext, SummaryActivity.class);
         intent.putExtra(CurrentActivity.INTENT_KEY_RUN, mRun);
+        intent.putExtra(CurrentActivity.INTENT_KEY_AVG, mRun.getAvgSpeed());
+        intent.putExtra(CurrentActivity.INTENT_KEY_MAX, mRun.getHighestSpeed());
         // Progress Details in Shared Prefs
         mContext.startActivity(intent);
     }

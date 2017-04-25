@@ -93,6 +93,12 @@ public class ViewGoalsActivity extends AppCompatActivity implements View.OnClick
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setProgressValues();
+    }
+
     private void setupReferences() {
         btnSetGoalDaily = (Button)findViewById(R.id.btnSetGoalDaily);
         btnSetGoalWeekly = (Button)findViewById(R.id.btnSetGoalWeekly);
