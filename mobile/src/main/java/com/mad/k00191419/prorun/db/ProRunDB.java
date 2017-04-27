@@ -266,13 +266,14 @@ public class ProRunDB {
         // populate each run's locations
         for (Run run : runs) {
             // move cursor to locations table and get those for that run
+            long runNo = run.getNo();
             cursor = db.query(LOCATIONS_TBL,
                     null,
                     LOCATION_RUN_NO + "=?",   // where RUN is run.getNo()
-                    new String[]{run.getNo() + ""},
+                    new String[]{runNo + ""},
                     null, null, null, null);
 
-            for (Location loc : getLocationsForRun(run.getNo(), cursor)) {
+            for (Location loc : getLocationsForRun(runNo, cursor)) {
                 run.addLocation(loc);
             }
         }
@@ -280,9 +281,20 @@ public class ProRunDB {
             cursor.close();
 
         this.closeDB();
-        Log.d(APP_NAME, "Retrieved " + runs.size() + " players from " + RUNS_TBL);
+        Log.d(APP_NAME, "Retrieved " + runs.size() + " runs from " + RUNS_TBL);
 
         return runs;
+    }
+
+    public Run getRun(long runNo){
+
+        ArrayList<Run> ls = getRuns();
+        for(Run r : ls){
+            if(r.getNo() == runNo){
+                return r;
+            }
+        }
+        return null;
     }
 
     private ArrayList<Location> getLocationsForRun(long runNo, Cursor cursor) {

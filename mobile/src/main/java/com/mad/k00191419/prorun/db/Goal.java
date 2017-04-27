@@ -104,7 +104,7 @@ public class Goal {
 
     public int getDistanceProgress(){
         double distPrg;
-        if(mTargetDistance == 0){
+        if(mTargetDistance == 0 || mCurrentDistance > mTargetDistance){
             distPrg = 100;
         }
         else{
@@ -116,7 +116,7 @@ public class Goal {
 
     public int getCaloriesProgress(){
         double calPrg;
-        if(mTargetCalories == 0){
+        if(mTargetCalories == 0 || mCurrentCalories > mTargetCalories){
             calPrg = 100;
         }
         else {

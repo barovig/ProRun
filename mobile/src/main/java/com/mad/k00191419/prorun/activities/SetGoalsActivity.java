@@ -39,7 +39,7 @@ public class SetGoalsActivity extends AppCompatActivity
     Calendar mToday;
     int      mDailyMaxDistance = 10000;
     int      mDailyMaxCalories = 3000000;
-    int      mStepDivisor = 20;
+    int      mStepDivisor;
     int      mStepDist;
     int      mStepCal;
 
@@ -61,21 +61,21 @@ public class SetGoalsActivity extends AppCompatActivity
         switch(mGoal.getType()){
             case DAILY:
                 maxDist = mDailyMaxDistance;
-                mStepDist = mDailyMaxDistance / mStepDivisor;
+                mStepDist = 200;
                 maxCal = mDailyMaxCalories;
-                mStepCal = mDailyMaxCalories / mStepDivisor;
+                mStepCal = 100000;
                 break;
             case WEEKLY:
                 maxDist = mDailyMaxDistance * 7;
-                mStepDist = maxDist / mStepDivisor;
+                mStepDist = 500;
                 maxCal = mDailyMaxCalories * 7;
-                mStepCal = maxCal / mStepDivisor;
+                mStepCal = 500000;
                 break;
             case MONTHLY:
                 maxDist = mDailyMaxDistance * 30;
-                mStepDist = maxDist / mStepDivisor;
+                mStepDist = 1000;
                 maxCal = mDailyMaxCalories * 30;
-                mStepCal = maxCal / mStepDivisor;
+                mStepCal = 1000000;
                 break;
             default:
                 maxDist = 0;

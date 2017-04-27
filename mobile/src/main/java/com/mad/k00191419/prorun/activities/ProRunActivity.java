@@ -1,10 +1,16 @@
 package com.mad.k00191419.prorun.activities;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.media.Image;
+import android.preference.PreferenceManager;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -23,9 +29,15 @@ import com.mad.k00191419.prorun.db.Run;
 import com.mad.k00191419.prorun.utils.RunListAdapter;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import android.os.Handler;
 
 public class ProRunActivity extends AppCompatActivity
         implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+
+    // Consts
+    private final String PREF_KEY_ISRUNNING = "isRunning";
 
     // View references
     private TextView    tvProgress;
@@ -37,11 +49,13 @@ public class ProRunActivity extends AppCompatActivity
     private TextView    tvPercentage;
 
     // Fields
-    private String[]        goal_periods = {"Weekly", "Monthly", "Daily"};
-    private int             spinId = 0;
-    private Goal[]          goals = new Goal[3];
-    private ProRunDB        mDb;
-    private RunListAdapter  mAdapter;
+    private String[]            goal_periods = {"Daily", "Weekly", "Monthly"};
+    private int                 spinId = 0;
+    private Goal[]              goals = new Goal[3];
+    private ProRunDB            mDb;
+    private RunListAdapter      mAdapter;
+    private SharedPreferences   mPrefs;
+    private Handler             mUiHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +63,7 @@ public class ProRunActivity extends AppCompatActivity
         setContentView(R.layout.activity_pro_run);
 
         mDb = new ProRunDB(getApplicationContext());
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         setupReferences();
         setupSpinner();
@@ -68,9 +83,9 @@ public class ProRunActivity extends AppCompatActivity
     }
 
     private void setupGoals() {
-        goals[0] = mDb.getWeeklyGoal();
-        goals[1] = mDb.getMonthlyGoal();
-        goals[2] = mDb.getDailyGoal();
+        goals[1] = mDb.getWeeklyGoal();
+        goals[2] = mDb.getMonthlyGoal();
+        goals[0] = mDb.getDailyGoal();
     }
 
     @Override
@@ -78,6 +93,18 @@ public class ProRunActivity extends AppCompatActivity
         super.onResume();
         setupListView();
         setupGoals();
+        updateProgressBar();
+        // check if running and move to CurrentActivity if true
+        checkPrefs();
+    }
+
+    private void checkPrefs() {
+        if( mPrefs.getBoolean(PREF_KEY_ISRUNNING, false) ){
+            Intent intent = new Intent(this, CurrentActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+            startActivity(intent);
+            finish();
+        }
     }
 
     @Override
@@ -107,12 +134,30 @@ public class ProRunActivity extends AppCompatActivity
     public void onClick(View v) {
         int id = v.getId();
 
-        switch(id){
+        switch (id) {
             case R.id.ibStart:
                 Intent intent = new Intent(this, CurrentActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                checkLocationPerms();
                 startActivity(intent);
+                finish();
                 break;
 
+        }
+    }
+
+    private void checkLocationPerms() {
+        // check permissions
+        if (ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION))
+                return;
+            else
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
         }
     }
 
@@ -143,11 +188,16 @@ public class ProRunActivity extends AppCompatActivity
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        updateProgressBar();
+    }
+
+    private void updateProgressBar() {
         spinId = spinGoalPeriod.getSelectedItemPosition();
         // set progress values
         Goal g = goals[spinId];
         if(g == null) return;
-        int progress = g.getTotalProgress();
+        final int progress = g.getTotalProgress();
+
         pbGoalProgress.setProgress(progress);
         tvPercentage.setText(String.format("%d %%", progress));
     }

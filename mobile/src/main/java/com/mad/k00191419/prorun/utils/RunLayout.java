@@ -62,8 +62,6 @@ implements View.OnClickListener{
     public void onClick(View v) {
         Intent intent = new Intent(mContext, SummaryActivity.class);
         intent.putExtra(CurrentActivity.INTENT_KEY_RUN, mRun);
-        intent.putExtra(CurrentActivity.INTENT_KEY_AVG, mRun.getAvgSpeed());
-        intent.putExtra(CurrentActivity.INTENT_KEY_MAX, mRun.getHighestSpeed());
         // Progress Details in Shared Prefs
         mContext.startActivity(intent);
     }

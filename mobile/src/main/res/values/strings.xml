@@ -53,4 +53,9 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="string_label_highest_speed">Highest Speed</string>
+    <string name="enable_gps" type="id">Please enable GPS</string>
+    <string name="string_notification_text">Running</string>
+    <string name="string_toast_notrunning">Not currently running, nothing to stop</string>
+    <string name="string_toast_tryagain_later">Not connected to service, please try again later</string>
+    <string name="string_toast_nomapdata">Sorry, it seems recorded route has no locations</string>
 </resources>

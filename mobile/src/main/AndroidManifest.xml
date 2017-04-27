@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <permission
         android:name="com.mad.k00191419.prorun.permission.MAPS_RECEIVE"
@@ -32,7 +33,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.CurrentActivity" />
+        <activity android:name=".activities.CurrentActivity"
+            android:taskAffinity=""
+            android:launchMode="singleInstance"/>
         <activity
             android:name=".activities.SummaryActivity"
             android:noHistory="true" />

@@ -59,6 +59,9 @@ public class DetailsActivity extends FragmentActivity implements View.OnClickLis
         int id = v.getId();
         switch(id){
             case R.id.btnSummaryClose:
+                Intent intent = new Intent(this, ProRunActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
                 finish();
                 break;
         }

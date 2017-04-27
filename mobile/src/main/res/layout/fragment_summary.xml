@@ -165,12 +165,22 @@
                 android:textAppearance="@style/ProRunLabel"
                 android:textSize="14sp" />
 
-            <ProgressBar
-                android:id="@+id/pbDaily"
-                style="?android:attr/progressBarStyle"
+            <TextView
+                android:id="@+id/tvDailyProgress"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:textSize="16sp" />
+
+            <ProgressBar
+                android:id="@+id/pbDaily"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
 
         </LinearLayout>
     </TableRow>
@@ -196,12 +206,22 @@
                 android:textAppearance="@style/ProRunLabel"
                 android:textSize="14sp" />
 
-            <ProgressBar
-                android:id="@+id/pbWeekly"
-                style="?android:attr/progressBarStyle"
+            <TextView
+                android:id="@+id/tvWeeklyProgress"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:textSize="16sp" />
+
+            <ProgressBar
+                android:id="@+id/pbWeekly"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
 
         </LinearLayout>
 
@@ -222,12 +242,22 @@
                 android:textAppearance="@style/ProRunLabel"
                 android:textSize="14sp" />
 
-            <ProgressBar
-                android:id="@+id/pbMonthly"
-                style="?android:attr/progressBarStyle"
+            <TextView
+                android:id="@+id/tvMonthlyProgress"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:textSize="16sp" />
+
+            <ProgressBar
+                android:id="@+id/pbMonthly"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
 
         </LinearLayout>
     </TableRow>
