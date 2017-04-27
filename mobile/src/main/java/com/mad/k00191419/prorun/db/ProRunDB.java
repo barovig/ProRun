@@ -10,6 +10,7 @@ import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 
 public class ProRunDB {
 
@@ -283,6 +284,7 @@ public class ProRunDB {
         this.closeDB();
         Log.d(APP_NAME, "Retrieved " + runs.size() + " runs from " + RUNS_TBL);
 
+        Collections.reverse(runs);
         return runs;
     }
 

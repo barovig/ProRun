@@ -16,7 +16,7 @@ import com.mad.k00191419.prorun.fragments.SummaryFragment;
 
 public class DetailsPagerAdapter extends FragmentPagerAdapter {
 
-    private final int NUM_FRAGMENTS = 4;
+    private final int NUM_FRAGMENTS = 2;
     Run mRun;
     public DetailsPagerAdapter(FragmentManager fm) {
         super(fm);
@@ -26,13 +26,13 @@ public class DetailsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         Fragment fragment;
         switch(position){
+//            case 1:
+//                fragment = new GraphFragment();
+//                break;
+//            case 2:
+//                fragment = new GraphFragment();
+//                break;
             case 1:
-                fragment = new GraphFragment();
-                break;
-            case 2:
-                fragment = new GraphFragment();
-                break;
-            case 3:
                 fragment = new MapFragment();
                 break;
             default:

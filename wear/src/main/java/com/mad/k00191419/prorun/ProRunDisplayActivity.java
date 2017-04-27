@@ -3,7 +3,9 @@ package com.mad.k00191419.prorun;
 import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
@@ -39,13 +41,15 @@ implements MessageApi.MessageListener, GoogleApiClient.ConnectionCallbacks,
     private final String    MSGAPI_MSG_STOP = "/prorun_stop";
 
     private final int       NOTIF_ID = 12365;
+    private final String    PREFS_START_TIME = "start_time";
 
     // Fields
     GoogleApiClient           mApi;
     NotificationManagerCompat mNotifManager;
     boolean                   isGoing;
     long                      mStartTime = 0;
-    Handler                   mUiHandler;
+    SharedPreferences         mPrefs;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,7 +63,22 @@ implements MessageApi.MessageListener, GoogleApiClient.ConnectionCallbacks,
                 .addOnConnectionFailedListener(this)
                 .build();
         mApi.connect();
+        mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         mNotifManager = NotificationManagerCompat.from(this);
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor editor = mPrefs.edit();
+        editor.putLong(PREFS_START_TIME, mStartTime);
+        editor.commit();
+    }
+
+    @Override
+    protected void onResume() {
+        mStartTime = mPrefs.getLong(PREFS_START_TIME, 0);
+        super.onResume();
     }
 
     private void setupReferences() {
